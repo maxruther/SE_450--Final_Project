@@ -54,9 +54,6 @@ public class Catalog {
 	
 	public Product getCatalogItem(int itemNo) {
 		Product requestedItem = catalogItems.get(itemNo - 1);
-//		return prodFact.createProduct(requestedItem.getType(),
-//									  requestedItem.getName(), 
-//									  requestedItem.getPrice());
 		return requestedItem;
 	}
 
