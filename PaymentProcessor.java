@@ -7,7 +7,7 @@ public class PaymentProcessor {
 	private Logger theLogger;
 	
 	public PaymentProcessor(Cart theCart) {
-		this.theCart = theCart;
+		this.theCart = new Cart.CartBuilder().build();
 		sc = new Scanner(System.in);
 		theLogger = Logger.createLogger();
 	}
@@ -113,17 +113,17 @@ public class PaymentProcessor {
 			System.out.println("Before you can complete your order, you must enter some billing information:.\n");
 			
 			if (emptyAddr) {
-				System.out.println("Please enter an address: \n");
+				System.out.println("Please enter an address:");
 				theCart.setCustAddr(sc.nextLine());
 			}
 			
 			if (emptyCardType) {
-				System.out.println("Please enter your credit card type (eg. Visa, MasterCard, ...) :");
+				System.out.println("\nPlease enter your credit card type (eg. Visa, MasterCard, ...) :");
 				theCart.setCustCardType(sc.nextLine());
 			}
 			
 			if (emptyCardNum) {
-				System.out.println("Please enter your number (just 4 digits please): ");
+				System.out.println("\nPlease enter your number (just 4 digits please): ");
 				theCart.setCustCardNum(sc.nextInt());
 				sc.nextLine();
 			}

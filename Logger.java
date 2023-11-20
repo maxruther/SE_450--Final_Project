@@ -1,33 +1,40 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class Logger {
 	private static Logger instance;
 	
-	private String srcPath;
-	
-	private Logger(String srcPath) {
-		this.srcPath = "src\\";
-	}
+	private Logger() {}
 	
 	public static Logger createLogger() {
-		if (instance != null)
-			return instance;
-		else {
-			System.out.println("Logger hasn't yet been created.");
-			return null;
-		}
-	}
-	
-	public static Logger createLogger(String srcPath) {
 		if (instance == null) {
-			instance = new Logger(srcPath);
+			instance = new Logger();
 		}
 		return instance;
 	}
 	
+	public void saveCredentials(String credsFile, HashMap<String, String> credsMap) {
+		try {
+			FileWriter fileWriter = new FileWriter(credsFile, false);
+
+			for (Entry<String, String> creds : credsMap.entrySet()) {
+				String user = creds.getKey();
+				String pass = creds.getValue();
+				
+				fileWriter.write(user + "," + pass + "\n");
+			}
+			
+			fileWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void saveUserInfo(String custName, String custAddr, String custCardType, int custCardNum) {
-		String userInfoFilename = srcPath + "custInfo_" + custName + ".csv";
+		String userInfoFilename = "src\\custInfo_" + custName + ".csv";
 		try {
 			FileWriter fileWriter = new FileWriter(userInfoFilename, false);
 			fileWriter.write(custName + "," + custAddr + "," + custCardType + "," + custCardNum + "\n");
@@ -39,7 +46,7 @@ public class Logger {
 	}
 	
 	public void saveUserCart(String custName, CartContents cartItems) {
-		String userCartFilename = srcPath + "custCart_" + custName + ".csv";
+		String userCartFilename = "src\\custCart_" + custName + ".csv";
 		try {
 			FileWriter fileWriter = new FileWriter(userCartFilename, false);
 			StringBuilder sr = new StringBuilder();
