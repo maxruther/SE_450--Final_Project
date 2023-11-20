@@ -2,28 +2,32 @@
 public class MainClass {
 
 	public static void main(String[] args) {
+		String srcPath = "src\\";
 		String credsFile = "src\\creds.csv";
 		String dataFilename = "src\\CatalogItems.csv";
 		
-		UserLogin authenty = new UserLogin(credsFile);
-		authenty.logIn();
+		Catalog theCatalog = new Catalog(dataFilename);
+		Logger theLogger = Logger.createLogger(srcPath);
 		
+		UserLogin userAuth = new UserLogin(theCatalog, credsFile);
+		if ( !userAuth.logIn() ) return;
+		userAuth.loadUserInfo();
+		CartContents userCartContents = userAuth.loadUserCart();
 		
-//		Catalog theCatalog = new Catalog(dataFilename);
-//		theCatalog.printCatalog();
-//		
-//		System.out.println(theCatalog.getCatalogItem(6).getName());
-//		
-//		
-//		Cart theCart = Cart.createCart("Maxwell R");
-//		cartContents itemsInCart = theCart.getCartItems();
-//		itemsInCart.addToCart(theCatalog.getCatalogItem(6));
-//		itemsInCart.addToCart(theCatalog.getCatalogItem(1));
-//		itemsInCart.addToCart(theCatalog.getCatalogItem(6));
-//		itemsInCart.addToCart(theCatalog.getCatalogItem(3), 3);
-//		itemsInCart.printCart();
-//		
+		OrderProcessor shopper = new OrderProcessor(userCartContents, theCatalog);
+
+		shopper.shop();
 		
+		Cart theCart = new Cart.CartBuilder()
+				.setCustName(userAuth.getUsername())
+				.setCustAddr(userAuth.getCustAddr())
+				.setCustCardType(userAuth.getCustCardType())
+				.setCustCardNum(userAuth.getCustCardNum())
+				.setCartItems(userCartContents)
+				.build();
+		
+		PaymentProcessor payProcess = new PaymentProcessor(theCart);
+		payProcess.finalizeOrder();
 	}
 
 }

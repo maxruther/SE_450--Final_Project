@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Catalog {
+public class Catalog implements ProductList{
 	private ArrayList<Product> catalogItems;
 	private int size;
 	private ProductFactory prodFact;
@@ -21,7 +21,7 @@ public class Catalog {
 			while ((line = br.readLine()) != null) {
 				String[] row = line.split(",");
 				Product newProd = prodFact.createProduct(row[2],
-						row[0], Double.valueOf(row[1]));
+						row[0], Double.valueOf(row[1]), Integer.parseInt(row[3]));
 				
 				size++;
 				newProd.setProductNum(size);
@@ -45,25 +45,30 @@ public class Catalog {
 	}
 
 	public int getSize() {
-		return size;
+		return this.size;
 	}
 
 	public void setSize(int size) {
 		this.size = size;
 	}
 	
-	public Product getCatalogItem(int itemNo) {
+	public Product getItem(int itemNo) {
 		Product requestedItem = catalogItems.get(itemNo - 1);
 		return requestedItem;
 	}
 
 	public void printCatalog() {
-		System.out.println("AVAILABLE FOR PURCHASE");
-		System.out.println("----------------------\n");
+		System.out.println("\nAVAILABLE FOR PURCHASE");
+		System.out.println("----------------------");
 		
 		for (Product p: catalogItems) {
-			System.out.println(p.getProductNum() + ")");
-			System.out.println(p.toString() + "\n");
+			System.out.println();
+			System.out.println(p.getProductNum() + ")  " + p.toString());
 		}
+	}
+
+	@Override
+	public int getVariety() {
+		return this.getSize();
 	}
 }
