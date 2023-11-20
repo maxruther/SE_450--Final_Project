@@ -54,9 +54,10 @@ public class MainClass {
 		// The PaymentProcessor uses the Cart to finalize the order, requesting customer
 		// billing information if it's missing. 
 		//
-		// As mentioned, "finalizing" the order may just involve saving it to file if 
-		//the user has elected to quit without making the purchase.
-		PaymentProcessor payProcess = new PaymentProcessor(theCart);
+		// The Cart is a public Singleton, so it
+		// doesn't get passed to PaymentProcessor directly. It's instead "created" by
+		// the PaymentProcessor's constructor.
+		PaymentProcessor payProcess = new PaymentProcessor();
 		payProcess.finalizeOrder();
 	}
 

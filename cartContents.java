@@ -14,34 +14,6 @@ public class CartContents implements ProductList {
 		cartItems = new ArrayList<>();
 		isSaleReady = false;
 	}
-
-	public void addToCart(Product prod) {
-
-		Product newProd = prodFact.createProduct(prod.getType(),
-				  								prod.getName(), 
-				  								prod.getPrice(),
-				  								prod.getProdID());
-		
-		boolean prodContained = false;
-		for (int i = 0; i < cartVariety; i++) {
-			Product p = cartItems.get(i);
-			if (prod.getProdID() == p.getProdID()) {
-				p.setQty( p.getQty() + 1 );
-				cartSize++;
-				prodContained = true;
-				break;
-			}
-		}
-		
-		if (!prodContained) {
-			cartSize++;
-			cartVariety++;
-			newProd.setProductNum(cartSize);
-			
-			cartItems.add(newProd);
-		}
-		
-	}
 	
 	public void addToCart(Product prod, int n) {
 		
@@ -98,7 +70,8 @@ public class CartContents implements ProductList {
 		}
 	}
 	
-	public void printCart() {
+	@Override
+	public void printProdList() {
 		System.out.println("\nITEMS IN CART");
 		System.out.println("----------------------\n");
 		
@@ -106,6 +79,17 @@ public class CartContents implements ProductList {
 			System.out.println(p.getProductNum() + ")");
 			System.out.println(p.toString() + " || Qty in cart: " + p.getQty());
 		}
+	}
+
+	@Override
+	public Product getItem(int n) {
+		Product requestedItem = cartItems.get(n - 1);
+		return requestedItem;
+	}
+
+	@Override
+	public int getVariety() {
+		return this.cartVariety;
 	}
 
 	public int getSize() {
@@ -119,16 +103,4 @@ public class CartContents implements ProductList {
 	public void setSaleReady(boolean isSaleReady) {
 		this.isSaleReady = isSaleReady;
 	}
-
-	@Override
-	public Product getItem(int n) {
-		Product requestedItem = cartItems.get(n - 1);
-		return requestedItem;
-	}
-
-	@Override
-	public int getVariety() {
-		return this.cartVariety;
-	}
-	
 }

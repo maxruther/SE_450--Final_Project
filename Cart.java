@@ -1,13 +1,23 @@
 
 public class Cart {
+	// The Cart essentially represent the final order, as reached by logging
+	// a user in (LogIn) and taking them through the shopping module (OrderProcessor).
+	//
+	// Cart uses both the Singleton and the Builder patterns. The Singleton pattern
+	// can be observed in its distinct constructors, while the Builder is implemented
+	// as an inner static class of Cart (called CartBuilder).
+	
 	private static Cart instance;
 	
+	// The cart contents and customer info fields
 	private CartContents cartItems;
 	private String custName;
 	private String custAddr;
 	private String custCardType;
 	private int custCardNum;
 	
+	// The Cart's private constructor is only accessed by the Singleton creator method,
+	// createCart().
 	private Cart(CartBuilder builder) {
 		this.cartItems = builder.cartItems;
 		this.custName = builder.custName;
@@ -16,6 +26,7 @@ public class Cart {
 		this.custCardNum = builder.custCardNum;
 	}
 	
+	// This Singleton creator method is only accessed by the CartBuilder.build() method.
 	private static Cart createCart(CartBuilder builder) {
 		if (instance == null) {
 			instance = new Cart(builder);
@@ -23,10 +34,8 @@ public class Cart {
 		return instance;
 	}
 	
-	public void clearCartContents() {
-		this.cartItems = new CartContents();
-	}
-	
+	// Cart's toString() is overridden, for convenient printing during PaymentProcessor's
+	// order review process.
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n----------------------\n"
@@ -50,6 +59,15 @@ public class Cart {
 		
 		return sb.toString();
 	}
+	
+	// This cart-clearing method is used when a purchase has been completed (which is done
+	// by the PaymentProcessor.)
+	public void clearCartContents() {
+		this.cartItems = new CartContents();
+	}
+	
+	// Here are various getters and setters. Skip past these to see the inner Builder class 
+	// at the bottom of the page.
 	
 	public int getCustCardNum() {
 		return custCardNum;
@@ -91,6 +109,14 @@ public class Cart {
 		this.custCardType = custCardType;
 	}
 	
+	// The CartBuilder class is solely responsible for the creation of a
+	// Cart object.
+	//
+	// At the end of MainClass, the CartBuilder takes the customer info and
+	// cart contents that were thus far collected by the LogIn and 
+	// OrderProcessor, respectively, and creates a Cart. The Cart is then
+	// used as an aggregation of that data, and is processed by the 
+	// PaymentProcessor.
 	public static class CartBuilder {
 		private String custName;
 		private String custAddr;

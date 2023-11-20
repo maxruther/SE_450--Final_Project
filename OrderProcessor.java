@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class OrderProcessor {
@@ -7,12 +6,14 @@ public class OrderProcessor {
 	private int menuLength = 5;
 	
 	private Scanner sc;
+	private GetInput getInput;
 	
 	public OrderProcessor(CartContents usersCart, Catalog catalog) {
 		this.usersCart = usersCart;
 		this.catalog = catalog;
 		
 		this.sc = new Scanner(System.in);
+		getInput = new GetInput(sc);
 	}
 	
 	// This shop() method is essentially the Main method of this OrderProcessor class.
@@ -20,7 +21,7 @@ public class OrderProcessor {
 		
 		// The menu is printed and the user enters a menu choice.
 		printMenu();
-		int userSelect = userSelectsChoice(menuLength);
+		int userSelect = getInput.userSelectsChoice(menuLength);
 		
 		// Depending on the user's menu choice, items are added or removed from the cart, or
 		// the user can quit the shopping experience (while indicating whether they are
@@ -34,7 +35,7 @@ public class OrderProcessor {
 				// If the cart is empty, a message is printed to clarify that.
 				if (usersCart.getVariety() == 0) System.out.println("\n\nYour cart is empty. Please "
 																	+ "feel free to add items.");
-				else usersCart.printCart();
+				else usersCart.printProdList();
 			}
 			else if (userSelect == 2) {
 				// This branch is for adding products to the cart, which is handled by the below method.
@@ -68,7 +69,7 @@ public class OrderProcessor {
 			}
 			
 			printMenu();
-			userSelect = userSelectsChoice(menuLength);
+			userSelect = getInput.userSelectsChoice(menuLength);
 			
 		}
 		return usersCart;
@@ -89,13 +90,13 @@ public class OrderProcessor {
 	// This method handles selecting products from the catalog to add to the cart.
 	public void addCartContents() {
 		// The catalog is printed, for the user to view the available products.
-		catalog.printCatalog();
+		catalog.printProdList();
 		System.out.println("\n\nTo choose a listed item, please enter its corresponding"
 							+ " number. Or enter 0 to quit:\n");
 		
 		// The user indicates a product choice. Their entry is gathered and validated by
 		// the userSelectsItem() method.
-		int prodChoice = userSelectsItem(catalog);
+		int prodChoice = getInput.userSelectsItem(catalog);
 		
 		// If the user hasn't entered zero to cancel their decision to add a product,
 		// then they are asked to indicate their desired quantity of that product.
@@ -104,7 +105,7 @@ public class OrderProcessor {
 			
 			// The user's entry for product quantity is gathered and validated, by a 
 			// dedicated method.
-			int qtyChoice = userIndicatesQty();
+			int qtyChoice = getInput.userIndicatesQty();
 			
 			// The product is added to the user's cart at the desired quantity.
 			usersCart.addToCart(catalog.getItem(prodChoice), qtyChoice);
@@ -114,96 +115,23 @@ public class OrderProcessor {
 	// This method has the user select products from the cart to remove.
 	public void removeCartContents() {
 		// The cart is printed for the user to view.
-		usersCart.printCart();
+		usersCart.printProdList();
 		System.out.println("\n\nTo choose a cart item to remove, please enter its "
 						+ "corresponding number. Or enter 0 to quit:\n");
 		
 		// The user indicates a product choice. Their entry is gathered and validated by
 		// the userSelectsItem() method.
-		int prodChoice = userSelectsItem(usersCart);
+		int prodChoice = getInput.userSelectsItem(usersCart);
 		
 		// If the user hasn't entered zero to cancel their decision to remove a product,
 		// then they are asked to indicate the quantity of product to remove.
 		if (prodChoice > 0) {
 			System.out.println("How many would you like to remove?");
-			int qtyChoice = userIndicatesQty();
+			int qtyChoice = getInput.userIndicatesQty();
 			
 			// The specified quantity of that product is removed from the user's cart.
 			usersCart.removeFromCart(usersCart.getItem(prodChoice), qtyChoice);
 		}
 	}
 	
-	// This userSelectsChoice() method is used to get a valid entry from the user for a menu choice.
-	public int userSelectsChoice(int numChoices) {
-		int userInput = 0;
-		while (true) {
-			try {
-				userInput = sc.nextInt();
-				sc.nextLine();
-				while ( !(userInput >= 1 && userInput <= numChoices) ) {
-					System.out.println("Invalid choice entered. Please enter an integer between 1 "
-										+ "and " + numChoices + ".");
-					userInput = sc.nextInt();
-					sc.nextLine();
-				}
-				break;
-			} catch (InputMismatchException e) {
-				sc.nextLine();
-				System.out.println("Invalid input. Please input an integer.");
-			}
-		}
-		
-		return userInput;
-	}
-	
-	// This userSelectsItem() method is used to retrieve the ProductList index of a specified
-	// product. ProductList is the interface implemented by CartContents and Catalog.
-	public int userSelectsItem(ProductList pl) {
-		int userInput = 0;
-		while (true) {
-			try {
-				userInput = sc.nextInt();
-				sc.nextLine();
-				while ( !(userInput >= 0 && userInput <= pl.getVariety()) ) {
-					System.out.println("Invalid choice entered. Please enter integer between 0 and "
-										+ pl.getVariety() + ".");
-					userInput = sc.nextInt();
-					sc.nextLine();
-				}
-				break;
-			} catch (InputMismatchException e) {
-				sc.nextLine();
-				System.out.println("Invalid input. Please input an integer.");
-			}
-		}
-		if (userInput > 0) {
-			Product tempProd = pl.getItem(userInput);
-			System.out.println("Product selected: " + tempProd.getName() + " || $" + tempProd.getPrice());
-			if (pl instanceof CartContents) System.out.println("Qty in cart: " + tempProd.getQty() + "\n");
-			
-		}
-		return userInput;
-	}
-	
-	// userIndicatesQty() gets a valid entry for product quantity from the user (a non-negative integer.)
-	public int userIndicatesQty() {
-		int userInput = 0;
-		while (true) {
-			try {
-				userInput = sc.nextInt();
-				sc.nextLine();
-				while ( !(userInput >= 0 ) ) {
-					System.out.println("Invalid choice entered. Please enter an integer greater than zero.");
-					userInput = sc.nextInt();
-					sc.nextLine();
-				}
-				break;
-			} catch (InputMismatchException e) {
-				sc.nextLine();
-				System.out.println("Invalid input. Please input an integer.");
-			}
-		}
-		
-		return userInput;
-	}
 }

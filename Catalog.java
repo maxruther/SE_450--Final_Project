@@ -35,29 +35,18 @@ public class Catalog implements ProductList{
 		}
 		
 	}
-	
-	public ArrayList<Product> getCatalogItems() {
-		return catalogItems;
-	}
-
-	public void setCatalogItems(ArrayList<Product> catalogItems) {
-		this.catalogItems = catalogItems;
-	}
 
 	public int getSize() {
 		return this.size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
 	}
 	
 	public Product getItem(int itemNo) {
 		Product requestedItem = catalogItems.get(itemNo - 1);
 		return requestedItem;
 	}
-
-	public void printCatalog() {
+	
+	@Override
+	public void printProdList() {
 		System.out.println("\nAVAILABLE FOR PURCHASE");
 		System.out.println("----------------------");
 		

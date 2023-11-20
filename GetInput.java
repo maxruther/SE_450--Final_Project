@@ -4,6 +4,10 @@ import java.util.Scanner;
 public class GetInput {
 	private Scanner sc;
 	
+	public GetInput(Scanner sc) {
+		this.sc = sc;
+	}
+	
 	public GetInput() {
 		this.sc = new Scanner(System.in);
 	}

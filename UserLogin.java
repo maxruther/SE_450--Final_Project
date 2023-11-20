@@ -28,6 +28,7 @@ public class UserLogin {
 	private int custCardNum;
 
 	private Scanner sc;
+	private GetInput getInput;
 	
 	// The Logger is used to log user log-ins as well as new user registrations
 	// as important events, to the importantEvents.csv file.
@@ -44,6 +45,8 @@ public class UserLogin {
 		System.out.println(credsMap);
 		
 		this.theLogger = Logger.createLogger();
+		sc = new Scanner(System.in);
+		getInput = new GetInput(sc);
 		
 		// Customer info fields are initialized to empty strings and zero.
 		this.username = "";
@@ -89,13 +92,11 @@ public class UserLogin {
 	// recognized, then it can be registered along with a password.
 	// After a user is logged in, after which the user's cart and
 	// customer info from previous sessions can be loaded.
-	public boolean logIn() {
-		// logIn() is boolean because it returns true or false, depending
-		// on whether the log-in was successful.
-		// A return of false leads to the termination of MainClass.
-		
-		sc = new Scanner(System.in);
-		
+	//
+	//// logIn() is boolean because it returns true or false, depending
+	// on whether the log-in was successful.
+	// A return of false leads to the termination of MainClass.
+	public boolean logIn() {	
 		// The user is asked for their username.
 		System.out.println("\n---------------------------------\n"
 						   + "             LOG-IN\n"
@@ -162,13 +163,7 @@ public class UserLogin {
 				// to register it or quit.
 				System.out.println("\nUsername not found. Would you like to register a new one?\n"
 						+ "Please indicate (y) or (n):");
-				String tempResponse = sc.nextLine().toLowerCase();
-				
-				// The user's response is here constrained to "y" or "n"
-				while(!tempResponse.equals("y") && !tempResponse.equals("n")) {
-					System.out.println("Invalid entry: " + tempResponse + "\n\nPlease enter (y) or (n): ");
-					tempResponse = sc.nextLine().toLowerCase();
-				}
+				String tempResponse = getInput.userSaysY_N();
 				
 				// If the user chooses to register a new username, they must provide a password and
 				// successfully retype it to confirm.
@@ -226,6 +221,12 @@ public class UserLogin {
 		// stored in the 'src' directory where the Java class files lie.
 		// The naming conventions of such files is 'custInfo_<username>.csv'.
 		String userInfoFilename = "src\\custInfo_" + username + ".csv";
+		
+		File f = new File(userInfoFilename);
+		if (!f.exists()) {
+			System.out.println("\nThere is no preexisting customer info file for user: " + username);
+			return;
+		}
 		
 		try {
 			BufferedReader br;
