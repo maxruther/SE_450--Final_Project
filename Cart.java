@@ -118,12 +118,16 @@ public class Cart {
 	// used as an aggregation of that data, and is processed by the 
 	// PaymentProcessor.
 	public static class CartBuilder {
+		private CartContents cartItems;
 		private String custName;
 		private String custAddr;
 		private String custCardType;
 		private int custCardNum;
 		
-		private CartContents cartItems;
+		public CartBuilder setCartItems(CartContents cartItems) {
+			this.cartItems = cartItems;
+			return this;
+		}
 		
 		public CartBuilder setCustName(String custName) {
 			this.custName = custName;
@@ -142,11 +146,6 @@ public class Cart {
 		
 		public CartBuilder setCustCardNum(int cardNum) {
 			this.custCardNum = cardNum;
-			return this;
-		}
-		
-		public CartBuilder setCartItems(CartContents cartItems) {
-			this.cartItems = cartItems;
 			return this;
 		}
 		

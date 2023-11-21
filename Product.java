@@ -18,6 +18,30 @@ public abstract class Product {
 		this.qty = 1;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	public int getQty() {
 		return qty;
 	}
@@ -33,30 +57,6 @@ public abstract class Product {
 	public void setProdID(int prodID) {
 		this.prodID = prodID;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 	
 	public int getProductNum() {
 		return productNum;
@@ -69,9 +69,6 @@ public abstract class Product {
 	public String toString() {
 		int namePadding = 20 - this.name.length();
 		int pricePadding = 12 - String.valueOf(this.price).length();
-//		return this.name + "\n" +
-//				"Price: $" + this.price + "\n" +
-//				"Category: " + this.type + "\n";
 		return this.name + " ".repeat(namePadding) + " || " +
 		" $" + this.price + " ".repeat(pricePadding) + " || " +
 		this.type;

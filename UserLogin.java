@@ -64,7 +64,7 @@ public class UserLogin {
 	// It reads user/password pairs from the credsFile into a HashMap.
 	// Newly registered user/pass pairs are added to this HashMap, which is
 	// always used to rewrite the credsFile at the end of the program.
-	public HashMap<String, String> loadSavedCreds() {
+	private HashMap<String, String> loadSavedCreds() {
 		HashMap<String, String> credsMap = new HashMap<>();
 		
 		try {
@@ -186,12 +186,12 @@ public class UserLogin {
 							password = newPass;
 							this.credsMap.put(username, password);
 							
-							// In this updateCreds() method, the HashMap of user/pass pairs overwrites
-							// the credential file, to reflect the newly added user & pass.
-//							updateCreds();
+							// The logger saves the new set of credentials (writing the whole HashMap.) It also
+							// saves the user's customer info to file, which is yet blank.
 							theLogger.saveCredentials(credsFile, credsMap);
 							theLogger.saveUserInfo(username, custAddr, custCardType, custCardNum);
 							
+							// The logger records the registration of a new user as an important event.
 							theLogger.logEvent("New user registered and logged in: " + username);
 						}
 						else {
@@ -209,11 +209,13 @@ public class UserLogin {
 				}		
 			}
 		}
+		
+		loadUserInfo();
 		return loggedIn;
 	}
 	
 	// loadUserInfo() is used to load a user's customer info from their corresponding file.
-	public void loadUserInfo() {
+	private void loadUserInfo() {
 		// If the user is freshly registered, this method is immediately concludes.
 		if (newUser) return;
 		

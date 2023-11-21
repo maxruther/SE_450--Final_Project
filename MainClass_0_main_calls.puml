@@ -1,0 +1,611 @@
+@startuml
+
+/' diagram meta data start
+config=CallConfiguration;
+{
+  "rootMethod": "MainClass#main(String[])",
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showMethodParametersTypes": false,
+    "showMethodParametersNames": false,
+    "showMethodReturnType": false,
+    "showPackageLevels": 2,
+    "showCallOrder": false,
+    "edgeMode": "MethodsOnly", // TypesOnly, MethodsOnly, TypesAndMethods, MethodsAndDirectTypeUsage
+    "showDetailedClassStructure": false
+  },
+  "rootClass": "MainClass",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="LR"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1003854516 { 
+   	label=PaymentProcessor
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_21734830 { 
+   	label=PaymentProcessor
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   PaymentProcessor1003854516XXXfinalizeOrder0[
+	label="+ finalizeOrder()"
+	style=filled
+	fillcolor=white
+	tooltip="PaymentProcessor
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_1206283898 { 
+   	label=CartContents
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1369440622 { 
+   	label=CartContents
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   CartContents1206283898XXXaddToCart1129280140[
+	label="+ addToCart()"
+	style=filled
+	fillcolor=white
+	tooltip="CartContents
+
+null"
+	fontcolor=darkgreen
+];
+
+CartContents1206283898XXXgetItem104431[
+	label="+ getItem()"
+	style=filled
+	fillcolor=white
+	tooltip="CartContents
+
+null"
+	fontcolor=darkgreen
+];
+
+CartContents1206283898XXXprintProdList0[
+	label="+ printProdList()"
+	style=filled
+	fillcolor=white
+	tooltip="CartContents
+
+null"
+	fontcolor=darkgreen
+];
+
+CartContents1206283898XXXremoveFromCart1129280140[
+	label="+ removeFromCart()"
+	style=filled
+	fillcolor=white
+	tooltip="CartContents
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_1471215356 { 
+   	label=OrderProcessor
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1151430446 { 
+   	label=OrderProcessor
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   OrderProcessor1471215356XXXaddCartContents0[
+	label="+ addCartContents()"
+	style=filled
+	fillcolor=white
+	tooltip="OrderProcessor
+
+null"
+	fontcolor=darkgreen
+];
+
+OrderProcessor1471215356XXXprintMenu0[
+	label="+ printMenu()"
+	style=filled
+	fillcolor=white
+	tooltip="OrderProcessor
+
+null"
+	fontcolor=darkgreen
+];
+
+OrderProcessor1471215356XXXremoveCartContents0[
+	label="+ removeCartContents()"
+	style=filled
+	fillcolor=white
+	tooltip="OrderProcessor
+
+null"
+	fontcolor=darkgreen
+];
+
+OrderProcessor1471215356XXXshop0[
+	label="+ shop()"
+	style=filled
+	fillcolor=white
+	tooltip="OrderProcessor
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_1726840607 { 
+   	label=MainClass
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_724317968 { 
+   	label=MainClass
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   MainClass1726840607XXXmain1859653459[
+	label="+ main()"
+	style=filled
+	fillcolor=white
+	tooltip="MainClass
+
+null"
+	penwidth=4
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_1969169858 { 
+   	label=UserLogin
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_34525838 { 
+   	label=UserLogin
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   UserLogin1969169858XXXloadUserCart0[
+	label="+ loadUserCart()"
+	style=filled
+	fillcolor=white
+	tooltip="UserLogin
+
+null"
+	fontcolor=darkgreen
+];
+
+UserLogin1969169858XXXlogIn0[
+	label="+ logIn()"
+	style=filled
+	fillcolor=white
+	tooltip="UserLogin
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_2013470288 { 
+   	label=Logger
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_555638702 { 
+   	label=Logger
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Logger2013470288XXXlogEvent1808118735[
+	label="+ logEvent()"
+	style=filled
+	fillcolor=white
+	tooltip="Logger
+
+null"
+	fontcolor=darkgreen
+];
+
+Logger2013470288XXXlogUserOrder2092864[
+	label="+ logUserOrder()"
+	style=filled
+	fillcolor=white
+	tooltip="Logger
+
+null"
+	fontcolor=darkgreen
+];
+
+Logger2013470288XXXsaveCredentials2038980533[
+	label="+ saveCredentials()"
+	style=filled
+	fillcolor=white
+	tooltip="Logger
+
+null"
+	fontcolor=darkgreen
+];
+
+Logger2013470288XXXsaveUserCart408254369[
+	label="+ saveUserCart()"
+	style=filled
+	fillcolor=white
+	tooltip="Logger
+
+null"
+	fontcolor=darkgreen
+];
+
+Logger2013470288XXXsaveUserInfo1846040672[
+	label="+ saveUserInfo()"
+	style=filled
+	fillcolor=white
+	tooltip="Logger
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_2020827700 { 
+   	label=GetInput
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_837102766 { 
+   	label=GetInput
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   GetInput2020827700XXXfillInRequiredInfo2092864[
+	label="+ fillInRequiredInfo()"
+	style=filled
+	fillcolor=white
+	tooltip="GetInput
+
+null"
+	fontcolor=darkgreen
+];
+
+GetInput2020827700XXXuserIndicatesQty0[
+	label="+ userIndicatesQty()"
+	style=filled
+	fillcolor=white
+	tooltip="GetInput
+
+null"
+	fontcolor=darkgreen
+];
+
+GetInput2020827700XXXuserSaysY_N0[
+	label="+ userSaysY_N()"
+	style=filled
+	fillcolor=white
+	tooltip="GetInput
+
+null"
+	fontcolor=darkgreen
+];
+
+GetInput2020827700XXXuserSaysY_N_E0[
+	label="+ userSaysY_N_E()"
+	style=filled
+	fillcolor=white
+	tooltip="GetInput
+
+null"
+	fontcolor=darkgreen
+];
+
+GetInput2020827700XXXuserSelectsChoice104431[
+	label="+ userSelectsChoice()"
+	style=filled
+	fillcolor=white
+	tooltip="GetInput
+
+null"
+	fontcolor=darkgreen
+];
+
+GetInput2020827700XXXuserSelectsItem175999501[
+	label="+ userSelectsItem()"
+	style=filled
+	fillcolor=white
+	tooltip="GetInput
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_2067279163 { 
+   	label=ProductFactory
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_284452274 { 
+   	label=ProductFactory
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   ProductFactory2067279163XXXcreateProduct70773952[
+	label="+ createProduct()"
+	style=filled
+	fillcolor=white
+	tooltip="ProductFactory
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_2074609671 { 
+   	label=Catalog
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1446054140 { 
+   	label=Catalog
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Catalog2074609671XXXgetItem104431[
+	label="+ getItem()"
+	style=filled
+	fillcolor=white
+	tooltip="Catalog
+
+null"
+	fontcolor=darkgreen
+];
+
+Catalog2074609671XXXprintProdList0[
+	label="+ printProdList()"
+	style=filled
+	fillcolor=white
+	tooltip="Catalog
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_2092864 { 
+   	label=Cart
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_2124693202 { 
+   	label=Cart
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Cart2092864XXXclearCartContents0[
+	label="+ clearCartContents()"
+	style=filled
+	fillcolor=white
+	tooltip="Cart
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_814462605 { 
+   	label=CartBuilder
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   CartBuilder2092864XXXbuild0[
+	label="+ build()"
+	style=filled
+	fillcolor=white
+	tooltip="CartBuilder
+
+null"
+	fontcolor=darkgreen
+];
+
+CartBuilder2092864XXXsetCartItems1206283898[
+	label="+ setCartItems()"
+	style=filled
+	fillcolor=white
+	tooltip="CartBuilder
+
+null"
+	fontcolor=darkgreen
+];
+
+CartBuilder2092864XXXsetCustAddr1808118735[
+	label="+ setCustAddr()"
+	style=filled
+	fillcolor=white
+	tooltip="CartBuilder
+
+null"
+	fontcolor=darkgreen
+];
+
+CartBuilder2092864XXXsetCustCardNum104431[
+	label="+ setCustCardNum()"
+	style=filled
+	fillcolor=white
+	tooltip="CartBuilder
+
+null"
+	fontcolor=darkgreen
+];
+
+CartBuilder2092864XXXsetCustCardType1808118735[
+	label="+ setCustCardType()"
+	style=filled
+	fillcolor=white
+	tooltip="CartBuilder
+
+null"
+	fontcolor=darkgreen
+];
+
+CartBuilder2092864XXXsetCustName1808118735[
+	label="+ setCustName()"
+	style=filled
+	fillcolor=white
+	tooltip="CartBuilder
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+'edges    
+CartContents1206283898XXXaddToCart1129280140 -> ProductFactory2067279163XXXcreateProduct70773952;
+Logger2013470288XXXlogUserOrder2092864 -> CartContents1206283898XXXgetItem104431;
+Logger2013470288XXXlogUserOrder2092864 -> Logger2013470288XXXlogEvent1808118735;
+Logger2013470288XXXsaveUserCart408254369 -> CartContents1206283898XXXgetItem104431;
+MainClass1726840607XXXmain1859653459 -> CartBuilder2092864XXXbuild0;
+MainClass1726840607XXXmain1859653459 -> CartBuilder2092864XXXsetCartItems1206283898;
+MainClass1726840607XXXmain1859653459 -> CartBuilder2092864XXXsetCustAddr1808118735;
+MainClass1726840607XXXmain1859653459 -> CartBuilder2092864XXXsetCustCardNum104431;
+MainClass1726840607XXXmain1859653459 -> CartBuilder2092864XXXsetCustCardType1808118735;
+MainClass1726840607XXXmain1859653459 -> CartBuilder2092864XXXsetCustName1808118735;
+MainClass1726840607XXXmain1859653459 -> OrderProcessor1471215356XXXshop0;
+MainClass1726840607XXXmain1859653459 -> PaymentProcessor1003854516XXXfinalizeOrder0;
+MainClass1726840607XXXmain1859653459 -> UserLogin1969169858XXXloadUserCart0;
+MainClass1726840607XXXmain1859653459 -> UserLogin1969169858XXXlogIn0;
+OrderProcessor1471215356XXXaddCartContents0 -> CartContents1206283898XXXaddToCart1129280140;
+OrderProcessor1471215356XXXaddCartContents0 -> Catalog2074609671XXXgetItem104431;
+OrderProcessor1471215356XXXaddCartContents0 -> Catalog2074609671XXXprintProdList0;
+OrderProcessor1471215356XXXaddCartContents0 -> GetInput2020827700XXXuserIndicatesQty0;
+OrderProcessor1471215356XXXaddCartContents0 -> GetInput2020827700XXXuserSelectsItem175999501;
+OrderProcessor1471215356XXXremoveCartContents0 -> CartContents1206283898XXXgetItem104431;
+OrderProcessor1471215356XXXremoveCartContents0 -> CartContents1206283898XXXprintProdList0;
+OrderProcessor1471215356XXXremoveCartContents0 -> CartContents1206283898XXXremoveFromCart1129280140;
+OrderProcessor1471215356XXXremoveCartContents0 -> GetInput2020827700XXXuserIndicatesQty0;
+OrderProcessor1471215356XXXremoveCartContents0 -> GetInput2020827700XXXuserSelectsItem175999501;
+OrderProcessor1471215356XXXshop0 -> CartContents1206283898XXXprintProdList0;
+OrderProcessor1471215356XXXshop0 -> GetInput2020827700XXXuserSelectsChoice104431;
+OrderProcessor1471215356XXXshop0 -> OrderProcessor1471215356XXXaddCartContents0;
+OrderProcessor1471215356XXXshop0 -> OrderProcessor1471215356XXXprintMenu0;
+OrderProcessor1471215356XXXshop0 -> OrderProcessor1471215356XXXremoveCartContents0;
+PaymentProcessor1003854516XXXfinalizeOrder0 -> Cart2092864XXXclearCartContents0;
+PaymentProcessor1003854516XXXfinalizeOrder0 -> GetInput2020827700XXXfillInRequiredInfo2092864;
+PaymentProcessor1003854516XXXfinalizeOrder0 -> GetInput2020827700XXXuserSaysY_N_E0;
+PaymentProcessor1003854516XXXfinalizeOrder0 -> GetInput2020827700XXXuserSelectsChoice104431;
+PaymentProcessor1003854516XXXfinalizeOrder0 -> Logger2013470288XXXlogEvent1808118735;
+PaymentProcessor1003854516XXXfinalizeOrder0 -> Logger2013470288XXXlogUserOrder2092864;
+PaymentProcessor1003854516XXXfinalizeOrder0 -> Logger2013470288XXXsaveUserCart408254369;
+PaymentProcessor1003854516XXXfinalizeOrder0 -> Logger2013470288XXXsaveUserInfo1846040672;
+UserLogin1969169858XXXloadUserCart0 -> CartContents1206283898XXXaddToCart1129280140;
+UserLogin1969169858XXXloadUserCart0 -> Catalog2074609671XXXgetItem104431;
+UserLogin1969169858XXXlogIn0 -> GetInput2020827700XXXuserSaysY_N0;
+UserLogin1969169858XXXlogIn0 -> Logger2013470288XXXlogEvent1808118735;
+UserLogin1969169858XXXlogIn0 -> Logger2013470288XXXsaveCredentials2038980533;
+UserLogin1969169858XXXlogIn0 -> Logger2013470288XXXsaveUserInfo1846040672;
+    
+}
+@enduml

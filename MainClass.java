@@ -16,12 +16,12 @@ public class MainClass {
 		// in, the program terminates.
 		if ( !userAuth.logIn() ) return;
 		
-		// However, if user log-in is indeed successful, that user's customer info, if
-		// entered prior, is loaded from a file.
+		// However, if user log-in is indeed successful, then that user's customer info, 
+		// if ever entered prior, is loaded from a file.
 		//
 		// This UserLogin class is what houses the customer information, at least until
 		// the Cart is built later for order finalization.
-		userAuth.loadUserInfo();
+		
 		
 		// In addition to loading the user's customer info, the UserLogin object
 		// also loads the cart contents from the previous session.

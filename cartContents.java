@@ -17,7 +17,7 @@ public class CartContents implements ProductList {
 	
 	public void addToCart(Product prod, int n) {
 		
-		if (n == 0) return;
+		if (n <= 0) return;
 		
 		Product newProd = prodFact.createProduct(prod.getType(),
 					prod.getName(), 
@@ -47,7 +47,7 @@ public class CartContents implements ProductList {
 	}
 	
 	public void removeFromCart(Product prod, int n) {
-		if (n == 0) return; 
+		if (n <= 0) return; 
 
 		boolean prodContained = false;
 		for (int i = 0; i < cartVariety; i++) {
@@ -92,10 +92,19 @@ public class CartContents implements ProductList {
 		return this.cartVariety;
 	}
 
+	@Override
 	public int getSize() {
 		return this.cartSize;
 	}
 	
+	public ArrayList<Product> getCartItems() {
+		return cartItems;
+	}
+
+	public void setCartItems(ArrayList<Product> cartItems) {
+		this.cartItems = cartItems;
+	}
+
 	public boolean isSaleReady() {
 		return isSaleReady;
 	}

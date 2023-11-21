@@ -22,6 +22,7 @@ public class Catalog implements ProductList{
 				String[] row = line.split(",");
 				Product newProd = prodFact.createProduct(row[2],
 						row[0], Double.valueOf(row[1]), Integer.parseInt(row[3]));
+
 				
 				size++;
 				newProd.setProductNum(size);
@@ -35,11 +36,10 @@ public class Catalog implements ProductList{
 		}
 		
 	}
-
-	public int getSize() {
-		return this.size;
-	}
 	
+
+	
+	@Override
 	public Product getItem(int itemNo) {
 		Product requestedItem = catalogItems.get(itemNo - 1);
 		return requestedItem;
@@ -55,9 +55,15 @@ public class Catalog implements ProductList{
 			System.out.println(p.getProductNum() + ")  " + p.toString());
 		}
 	}
+	
+	@Override
+	public int getSize() {
+		return this.size;
+	}
 
 	@Override
 	public int getVariety() {
 		return this.getSize();
 	}
+	
 }
