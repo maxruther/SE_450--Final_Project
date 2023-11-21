@@ -76,8 +76,9 @@ public class CartContents implements ProductList {
 		System.out.println("----------------------\n");
 		
 		for (Product p: cartItems) {
-			System.out.println(p.getProductNum() + ")");
-			System.out.println(p.toString() + " || Qty in cart: " + p.getQty());
+			System.out.println(p.getProductNum() + ")" + p.toString() 
+			+ " || Qty in cart: " + p.getQty());
+			System.out.println();
 		}
 	}
 

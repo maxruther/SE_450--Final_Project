@@ -226,7 +226,7 @@ public class UserLogin {
 		
 		File f = new File(userInfoFilename);
 		if (!f.exists()) {
-			System.out.println("\nThere is no preexisting customer info file for user: " + username);
+//			System.out.println("\nThere is no preexisting customer info file for user: " + username);
 			return;
 		}
 		

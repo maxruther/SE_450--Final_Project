@@ -122,7 +122,7 @@ public class GetInput {
 			}
 			
 			if (emptyCardNum) {
-				System.out.println("\nPlease enter your number (just 4 digits please): ");
+				System.out.println("\nPlease enter your (fake) credit card number: ");
 				theCart.setCustCardNum(sc.nextInt());
 				sc.nextLine();
 			}
